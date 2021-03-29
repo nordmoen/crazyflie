@@ -1,0 +1,20 @@
+[package]
+name = "crazyflie"
+version = "0.1.0"
+authors = ["Jørgen Nordmoen <jorgen@nordmoen.net>"]
+description = "Board support crate for STM32 on Crazyflie 2.1"
+keywords = ["board support", "crazyflie", "stm32"]
+license = "MIT or Apache-2.0"
+categories = ["embedded", "no-std", "science::robotics"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+cortex-m = "0.6"
+cortex-m-rt = "0.6"
+panic-halt = "0.2"
+
+[dependencies.stm32f4xx-hal]
+version = "0.8"
+features = ["rt", "stm32f405"]
