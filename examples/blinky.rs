@@ -7,6 +7,7 @@ use panic_halt as _;
 use cortex_m;
 use cortex_m_rt::entry;
 use crazyflie::hal::{self, prelude::*, stm32};
+use crazyflie::led::Leds;
 
 #[entry]
 fn main() -> ! {
@@ -17,7 +18,7 @@ fn main() -> ! {
     let gpioc = dp.GPIOC.split();
     let gpiod = dp.GPIOD.split();
     // Initialize LEDs
-    let mut leds = crazyflie::led::Leds::new(gpioc, gpiod);
+    let mut leds = Leds::new(gpioc, gpiod);
     // Setup system clock for delay handling
     let rcc = dp.RCC.constrain();
     let clocks = rcc.cfgr.sysclk(168.mhz()).freeze();

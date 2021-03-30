@@ -5,3 +5,4 @@
 pub use stm32f4xx_hal as hal;
 
 pub mod led;
+pub mod motor;
