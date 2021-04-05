@@ -122,7 +122,7 @@ impl Motors {
             gpioa.pa1.into_alternate_af1(),
             gpiob.pb11.into_alternate_af1(),
         );
-        let (m3, m1, m2) = pwm::tim2(tim2, tim2_pins, clocks.clone(), CLOCK_KHZ.khz());
+        let (m3, m1, m2) = pwm::tim2(tim2, tim2_pins, clocks, CLOCK_KHZ.khz());
         // Create motors connected to TIM4
         let tim4_pin = gpiob.pb9.into_alternate_af2();
         let m4 = pwm::tim4(tim4, tim4_pin, clocks, CLOCK_KHZ.khz());
