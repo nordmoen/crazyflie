@@ -23,10 +23,12 @@ pub type RedLEDRight = PC3<Output<PushPull>>;
 
 /// Abstraction over one of the LEDs on the Crazyflie
 pub enum Led {
+    /// LED on GPIOC
+    ///
+    /// These LEDs have reverse polarity compared to [`Led::LedD`]
+    LedC(PC<Output<PushPull>>),
     /// LED on GPIOD
     LedD(PD<Output<PushPull>>),
-    /// LED on GPIOC
-    LedC(PC<Output<PushPull>>),
 }
 
 impl Led {
@@ -34,8 +36,8 @@ impl Led {
     pub fn off(&mut self) {
         match self {
             // The following unwraps can never fail since the error is `Infallible`
+            Led::LedC(pin) => pin.set_high().unwrap(),
             Led::LedD(pin) => pin.set_low().unwrap(),
-            Led::LedC(pin) => pin.set_low().unwrap(),
         }
     }
 
@@ -43,8 +45,8 @@ impl Led {
     pub fn on(&mut self) {
         match self {
             // The following unwraps can never fail since the error is `Infallible`
+            Led::LedC(pin) => pin.set_low().unwrap(),
             Led::LedD(pin) => pin.set_high().unwrap(),
-            Led::LedC(pin) => pin.set_high().unwrap(),
         }
     }
 
@@ -52,8 +54,8 @@ impl Led {
     pub fn is_on(&self) -> bool {
         match self {
             // The following unwraps can never fail since the error is `Infallible`
+            Led::LedC(pin) => pin.is_set_low().unwrap(),
             Led::LedD(pin) => pin.is_set_high().unwrap(),
-            Led::LedC(pin) => pin.is_set_high().unwrap(),
         }
     }
 
@@ -64,6 +66,7 @@ impl Led {
 }
 
 /// A specific LED, use this to index [`Leds`] to get desired LED
+#[derive(Copy, Clone, Debug)]
 pub enum LedN {
     /// Red LED on the left
     RedLeft,
@@ -106,14 +109,14 @@ impl Leds {
                 .set_speed(Speed::Medium)
                 .downgrade(),
         );
-        let red_right = Led::LedC(
+        let green_right = Led::LedC(
             gpioc
                 .pc2
                 .into_push_pull_output()
                 .set_speed(Speed::Medium)
                 .downgrade(),
         );
-        let green_right = Led::LedC(
+        let red_right = Led::LedC(
             gpioc
                 .pc3
                 .into_push_pull_output()

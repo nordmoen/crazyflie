@@ -7,7 +7,7 @@ use panic_halt as _;
 use cortex_m;
 use cortex_m_rt::entry;
 use crazyflie::hal::{self, prelude::*, stm32};
-use crazyflie::led::Leds;
+use crazyflie::led::{Leds, LedN};
 
 #[entry]
 fn main() -> ! {
@@ -25,10 +25,12 @@ fn main() -> ! {
     // Create delay abstraction
     let mut delay = hal::delay::Delay::new(cp.SYST, clocks);
     // Loop forever blinking LEDs
+    leds.clear_all();
     loop {
-        leds.set_all();
-        delay.delay_ms(500_u32);
-        leds.clear_all();
-        delay.delay_ms(500_u32);
+        for led_idx in &[LedN::RedLeft, LedN::GreenLeft, LedN::RedRight, LedN::GreenRight, LedN::BlueLeft] {
+            leds[*led_idx].on();
+            delay.delay_ms(500_u32);
+            leds[*led_idx].off();
+        }
     }
 }
