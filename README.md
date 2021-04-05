@@ -3,8 +3,8 @@ The [Crazyflie 2.1](https://www.bitcraze.io) is a capable little drone weighing
 in at just 27 grams. It is fully open-source which makes it easy to play around
 with and learn from.
 
-The crate implements a board support for the Crazyflie so that one can program
-the drone in Rust.
+This crate implements board support for the Crazyflie so that one can program
+the drone in Rust. See the [`./examples` folder](./examples/) for inspiration.
 
 ## Uploading to Crazyflie
 First we need some prerequisites, install `dfu-utils` through your package
