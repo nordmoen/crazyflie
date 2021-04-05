@@ -7,7 +7,7 @@ use panic_halt as _;
 use cortex_m;
 use cortex_m_rt::entry;
 use crazyflie::hal::{self, prelude::*, stm32};
-use crazyflie::led::{Leds, LedN};
+use crazyflie::led::{LedN, Leds};
 
 #[entry]
 fn main() -> ! {
@@ -27,7 +27,13 @@ fn main() -> ! {
     // Loop forever blinking LEDs
     leds.clear_all();
     loop {
-        for led_idx in &[LedN::RedLeft, LedN::GreenLeft, LedN::RedRight, LedN::GreenRight, LedN::BlueLeft] {
+        for led_idx in &[
+            LedN::RedLeft,
+            LedN::GreenLeft,
+            LedN::RedRight,
+            LedN::GreenRight,
+            LedN::BlueLeft,
+        ] {
             leds[*led_idx].on();
             delay.delay_ms(500_u32);
             leds[*led_idx].off();
