@@ -11,7 +11,7 @@ use crate::hal::{
     stm32::{TIM2, TIM4},
 };
 
-/// PWM clock rate in Hz
+/// PWM clock rate in kHz
 ///
 /// The constant value comes from official CF2 firmware which report better filter ripple at 328kHz
 /// https://github.com/bitcraze/crazyflie-firmware/blob/master/src/drivers/interface/motors.h#L46
@@ -96,6 +96,11 @@ impl Motor {
         let volts = -0.0006239 * thrust * thrust + 0.088 * thrust;
         let percent = (volts / voltage).clamp(0.0, 1.0);
         self.set_duty((percent * u16::MAX as f32) as u16);
+    }
+
+    /// Helper method to stop the motor
+    pub fn stop(&mut self) {
+        self.set_duty(0);
     }
 }
 

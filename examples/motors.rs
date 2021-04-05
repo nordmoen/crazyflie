@@ -31,16 +31,21 @@ fn main() -> ! {
     // Make sure to enable the motors
     motors.enable();
     // Start testing motors
-    motors.m1.set_duty(150);
-    motors.m2.set_duty(150);
-    motors.m3.set_duty(150);
-    motors.m4.set_duty(150);
-    delay.delay_ms(5000_u32);
+    motors.m1.set_duty(15);
+    delay.delay_ms(200_u32);
+    motors.m1.stop();
+    motors.m2.set_duty(15);
+    delay.delay_ms(200_u32);
+    motors.m2.stop();
+    motors.m3.set_duty(15);
+    delay.delay_ms(200_u32);
+    motors.m3.stop();
+    motors.m4.set_duty(15);
+    delay.delay_ms(200_u32);
+    motors.m4.stop();
     // Once done, ensure motors are off
     motors.stop();
     motors.disable();
     // Loop forever after done testing motors
-    loop {
-    }
+    loop {}
 }
-
