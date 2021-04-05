@@ -20,3 +20,12 @@ features = ["rt", "stm32f405"]
 cortex-m = "0.6"
 cortex-m-rt = "0.6"
 panic-halt = "0.2"
+
+[profile.dev]
+debug = true
+lto = true
+
+[profile.release]
+debug = true
+lto = true
+opt-level = "s"
