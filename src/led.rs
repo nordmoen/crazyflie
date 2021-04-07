@@ -11,15 +11,15 @@ use crate::hal::prelude::*;
 use core::ops::{Index, IndexMut};
 
 /// Blue LED on the left
-pub type BlueLEDLeft = PD2<Output<PushPull>>;
+pub type BlueLedLeft = PD2<Output<PushPull>>;
 /// Red LED on the left
-pub type RedLEDLeft = PC0<Output<PushPull>>;
+pub type RedLedLeft = PC0<Output<PushPull>>;
 /// Green LED on the left
-pub type GreenLEDLeft = PC1<Output<PushPull>>;
+pub type GreenLedLeft = PC1<Output<PushPull>>;
 /// Green LED on the right
-pub type GreenLEDRight = PC2<Output<PushPull>>;
+pub type GreenLedRight = PC2<Output<PushPull>>;
 /// Red LED on the right
-pub type RedLEDRight = PC3<Output<PushPull>>;
+pub type RedLedRight = PC3<Output<PushPull>>;
 
 /// Abstraction over one of the LEDs on the Crazyflie
 pub enum Led {
