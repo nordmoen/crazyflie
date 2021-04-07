@@ -18,7 +18,7 @@ fn main() -> ! {
     let gpioc = dp.GPIOC.split();
     let gpiod = dp.GPIOD.split();
     // Initialize LEDs
-    let mut leds = Leds::new(gpioc, gpiod);
+    let mut leds = Leds::new(gpioc.pc0, gpioc.pc1, gpioc.pc2, gpioc.pc3, gpiod.pd2);
     // Setup system clock for delay handling
     let rcc = dp.RCC.constrain();
     let clocks = rcc.cfgr.sysclk(168.mhz()).freeze();

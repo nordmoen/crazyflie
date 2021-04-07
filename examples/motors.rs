@@ -23,7 +23,9 @@ fn main() -> ! {
     let rcc = dp.RCC.constrain();
     let clocks = rcc.cfgr.sysclk(168.mhz()).freeze();
     // Initialize the motors
-    let mut motors = Motors::new(clocks, dp.TIM2, dp.TIM4, gpioa, gpiob);
+    let mut motors = Motors::new(
+        clocks, dp.TIM2, dp.TIM4, gpioa.pa1, gpioa.pa15, gpiob.pb9, gpiob.pb11,
+    );
     // Create delay abstraction
     let mut delay = hal::delay::Delay::new(cp.SYST, clocks);
     // Before starting wait a bit so that users can set down the drone

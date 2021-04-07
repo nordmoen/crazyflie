@@ -4,7 +4,11 @@
 //! Instantiate the [`Motors`](Motors::new) structure to get access to individual [`Motor`]s.
 
 use crate::hal::{
-    gpio::{gpioa, gpiob},
+    gpio::{
+        gpioa::{PA1, PA15},
+        gpiob::{PB11, PB9},
+        Floating, Input,
+    },
     prelude::*,
     pwm,
     rcc::Clocks,
@@ -118,18 +122,20 @@ impl Motors {
         clocks: Clocks,
         tim2: TIM2,
         tim4: TIM4,
-        gpioa: gpioa::Parts,
-        gpiob: gpiob::Parts,
+        pa1: PA1<Input<Floating>>,
+        pa15: PA15<Input<Floating>>,
+        pb9: PB9<Input<Floating>>,
+        pb11: PB11<Input<Floating>>,
     ) -> Self {
         // Create motors connected to TIM2
         let tim2_pins = (
-            gpioa.pa15.into_alternate_af1(),
-            gpioa.pa1.into_alternate_af1(),
-            gpiob.pb11.into_alternate_af1(),
+            pa15.into_alternate_af1(),
+            pa1.into_alternate_af1(),
+            pb11.into_alternate_af1(),
         );
         let (m3, m1, m2) = pwm::tim2(tim2, tim2_pins, clocks, CLOCK_KHZ.khz());
         // Create motors connected to TIM4
-        let tim4_pin = gpiob.pb9.into_alternate_af2();
+        let tim4_pin = pb9.into_alternate_af2();
         let m4 = pwm::tim4(tim4, tim4_pin, clocks, CLOCK_KHZ.khz());
         // Return configured motors
         let mut ms = Motors {

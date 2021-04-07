@@ -4,9 +4,9 @@
 //! Instantiate the [`Leds`](Leds::new) structure and use [`LedN`] to index this structure to
 //! access the individual LEDs. The interface to each LED is controlled through [`Led`].
 
-use crate::hal::gpio::gpioc::{self, PC, PC0, PC1, PC2, PC3};
-use crate::hal::gpio::gpiod::{self, PD, PD2};
-use crate::hal::gpio::{Output, PushPull, Speed};
+use crate::hal::gpio::gpioc::{PC, PC0, PC1, PC2, PC3};
+use crate::hal::gpio::gpiod::{PD, PD2};
+use crate::hal::gpio::{Floating, Input, Output, PushPull, Speed};
 use crate::hal::prelude::*;
 use core::ops::{Index, IndexMut};
 
@@ -87,39 +87,35 @@ pub struct Leds {
 
 impl Leds {
     /// Initialize the LEDs on the Crazyflie
-    pub fn new(gpioc: gpioc::Parts, gpiod: gpiod::Parts) -> Self {
+    pub fn new(
+        pc0: PC0<Input<Floating>>,
+        pc1: PC1<Input<Floating>>,
+        pc2: PC2<Input<Floating>>,
+        pc3: PC3<Input<Floating>>,
+        pd2: PD2<Input<Floating>>,
+    ) -> Self {
         let red_left = Led::LedC(
-            gpioc
-                .pc0
-                .into_push_pull_output()
+            pc0.into_push_pull_output()
                 .set_speed(Speed::Medium)
                 .downgrade(),
         );
         let green_left = Led::LedC(
-            gpioc
-                .pc1
-                .into_push_pull_output()
+            pc1.into_push_pull_output()
                 .set_speed(Speed::Medium)
                 .downgrade(),
         );
         let blue_left = Led::LedD(
-            gpiod
-                .pd2
-                .into_push_pull_output()
+            pd2.into_push_pull_output()
                 .set_speed(Speed::Medium)
                 .downgrade(),
         );
         let green_right = Led::LedC(
-            gpioc
-                .pc2
-                .into_push_pull_output()
+            pc2.into_push_pull_output()
                 .set_speed(Speed::Medium)
                 .downgrade(),
         );
         let red_right = Led::LedC(
-            gpioc
-                .pc3
-                .into_push_pull_output()
+            pc3.into_push_pull_output()
                 .set_speed(Speed::Medium)
                 .downgrade(),
         );
