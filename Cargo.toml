@@ -10,14 +10,20 @@ edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[features]
+default = ["eeprom"]
+
+eeprom = ["eeprom24x"]
+
 [dependencies]
+eeprom24x = {version = "0.3", optional = true}
 
 [dependencies.stm32f4xx-hal]
-version = "0.8"
+version = "0.9"
 features = ["rt", "stm32f405"]
 
 [dev-dependencies]
-cortex-m = "0.6"
+cortex-m = "0.7"
 cortex-m-rt = "0.6"
 panic-halt = "0.2"
 
@@ -29,3 +35,7 @@ lto = true
 debug = true
 lto = true
 opt-level = "s"
+
+[[example]]
+name = "eeprom"
+required-features = ["eeprom"]

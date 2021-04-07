@@ -4,5 +4,7 @@
 
 pub use stm32f4xx_hal as hal;
 
+#[cfg(feature = "eeprom")]
+pub mod eeprom;
 pub mod led;
 pub mod motor;
