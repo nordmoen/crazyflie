@@ -8,3 +8,5 @@ pub use stm32f4xx_hal as hal;
 pub mod eeprom;
 pub mod led;
 pub mod motor;
+#[cfg(feature = "uart_syslink")]
+pub mod uart_syslink;

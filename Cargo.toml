@@ -11,12 +11,15 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [features]
-default = ["eeprom"]
+default = ["eeprom", "uart_syslink"]
 
 eeprom = ["eeprom24x"]
+uart_syslink = ["syslink", "heapless"]
 
 [dependencies]
 eeprom24x = {version = "0.3", optional = true}
+syslink = {path = "../syslink", optional = true}
+heapless = {version = "0.6", optional = true}
 
 [dependencies.stm32f4xx-hal]
 version = "0.9"
@@ -39,3 +42,7 @@ opt-level = "s"
 [[example]]
 name = "eeprom"
 required-features = ["eeprom"]
+
+[[example]]
+name = "syslink_irq"
+required-features = ["uart_syslink"]
