@@ -2,7 +2,7 @@
 name = "crazyflie"
 version = "0.1.0"
 authors = ["Jørgen Nordmoen <jorgen@nordmoen.net>"]
-description = "Board support crate for STM32 on Crazyflie 2.1"
+description = "Board support crate for the STM32F405 on the Crazyflie 2.1"
 keywords = ["board support", "crazyflie", "stm32"]
 license = "MIT or Apache-2.0"
 categories = ["embedded", "no-std", "science::robotics"]
